@@ -159,6 +159,7 @@ public class SuSyMetaTileEntities {
 
     public static SusyMetaTileEntityDumpingHatch DUMPING_HATCH;
 
+    public static MetaTileEntityInductionFurnace INDUCTION_FURNACE;
     public static MetaTileEntityAdvancedArcFurnace ADVANCED_ARC_FURNACE;
     public static MetaTileEntityClarifier CLARIFIER;
     public static MetaTileEntityDumper DUMPER;
@@ -371,6 +372,8 @@ public class SuSyMetaTileEntities {
         DRONE_PAD = registerMetaTileEntity(15062, new MetaTileEntityDronePad(susyId("drone_pad")));
 
         QUARRY = registerMetaTileEntity(15063, new MetaTileEntityQuarry(susyId("quarry")));
+
+        INDUCTION_FURNACE = registerMetaTileEntity(15064, new MetaTileEntityInductionFurnace(susyId("induction_furnace")));
 
         LEAD_DRUM = registerMetaTileEntity(14553, new MetaTileEntityDrum(susyId("drum.lead"), Materials.Lead, 32000));
         BRASS_DRUM = registerMetaTileEntity(17010, new MetaTileEntityDrum(susyId("drum.brass"), new PropertyFluidFilter(1280, true, false, true, false), false, Materials.Brass.getMaterialRGB(), 16000));

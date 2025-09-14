@@ -292,7 +292,7 @@ public class SuSyRecipeMaps {
             .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL)
             .setSound(GTSoundEvents.COOLING);
 
-    public static final RecipeMap<NoEnergyRecipeBuilder> REVERBERATORY_FURNACE = new RecipeMap<>("reverberatory_furnace", 3, 3, 3, 3, new NoEnergyRecipeBuilder(), false)
+    public static final RecipeMap<NoEnergyRecipeBuilder> REVERBERATORY_FURNACE = new RecipeMap<>("reverberatory_furnace", 9, 3, 3, 3, new NoEnergyRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL)
             .setSound(GTSoundEvents.FURNACE);
 
@@ -399,6 +399,10 @@ public class SuSyRecipeMaps {
             .setProgressBar(GuiTextures.PROGRESS_BAR_HAMMER, ProgressWidget.MoveType.VERTICAL)
             .setSound(GTSoundEvents.ELECTROLYZER)
             .allowEmptyOutput();
+
+    public static final RecipeMap<SimpleRecipeBuilder> INDUCTION_FURNACE_RECIPES = new RecipeMap<>("induction_furnace", 6, 3, 0, 3, new SimpleRecipeBuilder(), false)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL)
+            .setSound(GTSoundEvents.ARC);
   
     static {
         GCYMRecipeMaps.ALLOY_BLAST_RECIPES.onRecipeBuild(recipeBuilder -> ADVANCED_ARC_FURNACE.recipeBuilder()
