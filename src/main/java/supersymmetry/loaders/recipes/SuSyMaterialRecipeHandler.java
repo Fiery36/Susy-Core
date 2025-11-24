@@ -62,6 +62,8 @@ public class SuSyMaterialRecipeHandler {
                 SuSyMaterialRecipeHandler::processHIPPressing);
         addProcessingHandler(PropertyKey.DUST, OrePrefix.dust, SuSyMaterialFlags.CONTINUOUSLY_CAST,
                 SuSyMaterialRecipeHandler::processContinuouslyCast);
+        addProcessingHandler(PropertyKey.DUST, OrePrefix.dust, SuSyMaterialFlags.INDUCTION_MELT,
+                SuSyMaterialRecipeHandler::processInductionMelt);
     }
 
     public static <T extends IMaterialProperty> void addProcessingHandler(PropertyKey<T> propertyKey, OrePrefix prefix,
@@ -206,6 +208,16 @@ public class SuSyMaterialRecipeHandler {
                 .circuitMeta(1)
                 .output(wireGtSingle, material, 1)
                 .duration((int) material.getMass() / 4)
+                .EUt(getVoltageMultiplier(material))
+                .buildAndRegister();
+    }
+
+    public static void processInductionMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
+        SuSyRecipeMaps.INDUCTION_FURNACE.recipeBuilder()
+                .input(dust, material)
+                .circuitMeta(1)
+                .fluidOutputs(material.getFluid(144))
+                .duration((int) material.getFluid().getTemperature() / 4)
                 .EUt(getVoltageMultiplier(material))
                 .buildAndRegister();
     }
