@@ -62,8 +62,8 @@ public class SuSyMaterialRecipeHandler {
                 SuSyMaterialRecipeHandler::processHIPPressing);
         addProcessingHandler(PropertyKey.DUST, OrePrefix.dust, SuSyMaterialFlags.CONTINUOUSLY_CAST,
                 SuSyMaterialRecipeHandler::processContinuouslyCast);
-        addProcessingHandler(PropertyKey.DUST, OrePrefix.dust, SuSyMaterialFlags.INDUCTION_MELT,
-                SuSyMaterialRecipeHandler::processInductionMelt);
+        addProcessingHandler(PropertyKey.DUST, OrePrefix.dust, SuSyMaterialFlags.RESISTANCE_MELT,
+                SuSyMaterialRecipeHandler::processResistanceMelt);
     }
 
     public static <T extends IMaterialProperty> void addProcessingHandler(PropertyKey<T> propertyKey, OrePrefix prefix,
@@ -212,14 +212,26 @@ public class SuSyMaterialRecipeHandler {
                 .buildAndRegister();
     }
 
-    public static void processInductionMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
-        SuSyRecipeMaps.INDUCTION_FURNACE.recipeBuilder()
-                .input(dust, material)
-                .circuitMeta(1)
-                .fluidOutputs(material.getFluid(144))
-                .duration((int) material.getFluid().getTemperature() / 4)
-                .EUt(getVoltageMultiplier(material))
-                .buildAndRegister();
+    public static void processResistanceMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
+
+        Object[][] heatingElements = {
+                { Cupronickel, 1f },
+                { Kanthal, 0.75f },
+                { Nichrome, 0.6f }
+        };
+
+        for (Object[] he : heatingElements) {
+            Material heatingMat = (Material) he[0];
+            float multiplier = (float) he[1];
+
+            SuSyRecipeMaps.RESISTANCE_FURNACE.recipeBuilder()
+                    .input(dust, material)
+                    .notConsumable(spring, heatingMat)
+                    .fluidOutputs(material.getFluid(144))
+                    .duration(Math.round(multiplier * material.getFluid().getTemperature() / 4))
+                    .EUt(getVoltageMultiplier(material))
+                    .buildAndRegister();
+        }
     }
 
     private static int getVoltageMultiplier(Material material) {
