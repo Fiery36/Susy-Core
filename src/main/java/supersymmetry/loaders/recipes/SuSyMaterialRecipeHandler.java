@@ -62,6 +62,8 @@ public class SuSyMaterialRecipeHandler {
                 SuSyMaterialRecipeHandler::processHIPPressing);
         addProcessingHandler(PropertyKey.DUST, OrePrefix.dust, SuSyMaterialFlags.CONTINUOUSLY_CAST,
                 SuSyMaterialRecipeHandler::processContinuouslyCast);
+        addProcessingHandler(PropertyKey.DUST, OrePrefix.dust, SuSyMaterialFlags.INDUCTION_MELT,
+                SuSyMaterialRecipeHandler::processInductionMelt);
         addProcessingHandler(PropertyKey.DUST, OrePrefix.dust, SuSyMaterialFlags.RESISTANCE_MELT,
                 SuSyMaterialRecipeHandler::processResistanceMelt);
     }
@@ -212,6 +214,15 @@ public class SuSyMaterialRecipeHandler {
                 .buildAndRegister();
     }
 
+    public static void processInductionMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
+            SuSyRecipeMaps.INDUCTION_FURNACE.recipeBuilder()
+                    .input(dust, material)
+                    .fluidOutputs(material.getFluid(144))
+                    .duration(material.getFluid().getTemperature() / 16)
+                    .EUt(32)
+                    .buildAndRegister();
+    }
+
     public static void processResistanceMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
 
         Object[][] heatingElements = {
@@ -229,7 +240,7 @@ public class SuSyMaterialRecipeHandler {
                     .notConsumable(spring, heatingMat)
                     .fluidOutputs(material.getFluid(144))
                     .duration(Math.round(multiplier * material.getFluid().getTemperature() / 4))
-                    .EUt(getVoltageMultiplier(material))
+                    .EUt(4)
                     .buildAndRegister();
         }
     }

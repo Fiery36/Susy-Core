@@ -189,11 +189,13 @@ public class SusyMaterials {
 
         Materials.Hydrogen.addFlags(MaterialFlags.FLAMMABLE);
 
-        Materials.Bronze.addFlags(SuSyMaterialFlags.RESISTANCE_MELT);
-
         Materials.Copper.addFlags(SuSyMaterialFlags.RESISTANCE_MELT);
 
         Materials.Aluminium.addFlags(SuSyMaterialFlags.RESISTANCE_MELT);
+
+        Materials.Copper.addFlags(SuSyMaterialFlags.INDUCTION_MELT);
+
+        Materials.Aluminium.addFlags(SuSyMaterialFlags.INDUCTION_MELT);
     }
 
     private static void removeProperty(PropertyKey<?> key, Material material) {

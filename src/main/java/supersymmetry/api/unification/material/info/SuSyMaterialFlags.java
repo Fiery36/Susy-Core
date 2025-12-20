@@ -61,6 +61,10 @@ public class SuSyMaterialFlags {
             .requireFlags(GCYMMaterialFlags.NO_ALLOY_BLAST_RECIPES)
             .build();
 
+    public static final MaterialFlag INDUCTION_MELT = (new MaterialFlag.Builder("induction_melt"))
+            .requireProps(PropertyKey.DUST, PropertyKey.FLUID)
+            .build();
+
     public static final MaterialFlag RESISTANCE_MELT = (new MaterialFlag.Builder("resistance_melt"))
             .requireProps(PropertyKey.DUST, PropertyKey.FLUID)
             .build();
