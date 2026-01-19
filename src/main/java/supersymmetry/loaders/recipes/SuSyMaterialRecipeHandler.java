@@ -216,6 +216,7 @@ public class SuSyMaterialRecipeHandler {
 
     public static void processInductionMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
             SuSyRecipeMaps.INDUCTION_FURNACE.recipeBuilder()
+                    .circuitMeta(1)
                     .input(dust, material)
                     .fluidOutputs(material.getFluid(144))
                     .duration(material.getFluid().getTemperature() / 16)
