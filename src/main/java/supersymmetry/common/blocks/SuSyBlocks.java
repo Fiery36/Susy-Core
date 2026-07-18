@@ -60,6 +60,7 @@ public class SuSyBlocks {
     public static BlockEngineCasing ENGINE_CASING;
     public static BlockEngineCasing2 ENGINE_CASING_2;
     public static BlocksActiveCasing ACTIVE_CASING;
+    public static BlockCrucible CRUCIBLE;
 
     public static void init() {
         COOLING_COIL = new BlockCoolingCoil();
@@ -171,6 +172,9 @@ public class SuSyBlocks {
 
         ACTIVE_CASING = new BlocksActiveCasing();
         ACTIVE_CASING.setRegistryName("active_casing");
+
+        CRUCIBLE = new BlockCrucible();
+        CRUCIBLE.setRegistryName("crucible");
     }
 
     @SideOnly(Side.CLIENT)
@@ -212,6 +216,7 @@ public class SuSyBlocks {
         registerItemModel(ENGINE_CASING);
         registerItemModel(ENGINE_CASING_2);
         registerItemModel(ACTIVE_CASING);
+        registerItemModel(CRUCIBLE);
     }
 
     @SideOnly(Side.CLIENT)

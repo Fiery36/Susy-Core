@@ -217,19 +217,27 @@ public class SuSyMaterialRecipeHandler {
     public static void processInductionMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
             SuSyRecipeMaps.INDUCTION_FURNACE.recipeBuilder()
                     .circuitMeta(1)
+                    .input(ingot, material)
+                    .fluidOutputs(material.getFluid(144))
+                    .duration(material.getFluid().getTemperature() / 32)
+                    .EUt(30)
+                    .buildAndRegister();
+
+            SuSyRecipeMaps.INDUCTION_FURNACE.recipeBuilder()
+                    .circuitMeta(1)
                     .input(dust, material)
                     .fluidOutputs(material.getFluid(144))
-                    .duration(material.getFluid().getTemperature() / 16)
-                    .EUt(32)
+                    .duration(material.getFluid().getTemperature() / 32)
+                    .EUt(30)
                     .buildAndRegister();
     }
 
     public static void processResistanceMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
 
         Object[][] heatingElements = {
-                { Cupronickel, 1f },
-                { Kanthal, 0.75f },
-                { Nichrome, 0.6f }
+                { Cupronickel, 1.25f },
+                { Kanthal, 1f },
+                { Nichrome, 0.75f }
         };
 
         for (Object[] he : heatingElements) {
@@ -237,11 +245,19 @@ public class SuSyMaterialRecipeHandler {
             float multiplier = (float) he[1];
 
             SuSyRecipeMaps.RESISTANCE_FURNACE.recipeBuilder()
+                    .input(ingot, material)
+                    .notConsumable(spring, heatingMat)
+                    .fluidOutputs(material.getFluid(144))
+                    .duration(Math.round(multiplier * material.getFluid().getTemperature() / 8))
+                    .EUt(7)
+                    .buildAndRegister();
+
+            SuSyRecipeMaps.RESISTANCE_FURNACE.recipeBuilder()
                     .input(dust, material)
                     .notConsumable(spring, heatingMat)
                     .fluidOutputs(material.getFluid(144))
-                    .duration(Math.round(multiplier * material.getFluid().getTemperature() / 4))
-                    .EUt(4)
+                    .duration(Math.round(multiplier * material.getFluid().getTemperature() / 8))
+                    .EUt(7)
                     .buildAndRegister();
         }
     }

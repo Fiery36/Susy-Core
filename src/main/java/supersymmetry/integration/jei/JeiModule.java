@@ -63,9 +63,5 @@ public class JeiModule extends IntegrationSubmodule implements IModPlugin {
         registry.addRecipeCatalyst(SuSyMetaTileEntities.LARGE_STEEL_BOILER.getStackForm(), solidMapId);
         registry.addRecipeCatalyst(SuSyMetaTileEntities.STEAM_BOILER_COAL_BRONZE.getStackForm(), solidMapId);
         registry.addRecipeCatalyst(SuSyMetaTileEntities.STEAM_BOILER_COAL_STEEL.getStackForm(), solidMapId);
-
-        String InductionId = GTValues.MODID + ":" + SuSyRecipeMaps.INDUCTION_FURNACE.getUnlocalizedName();
-        registry.addRecipeCatalyst(SuSyMetaTileEntities.INDUCTION_FURNACE.getStackForm(), InductionId);
-
     }
 }
