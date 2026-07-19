@@ -1,8 +1,11 @@
 package supersymmetry.client.renderer.textures;
 
+import net.minecraft.item.EnumDyeColor;
+
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.*;
 import gregtech.client.renderer.texture.custom.DrumRenderer;
+import supersymmetry.api.util.SuSyUtility;
 import supersymmetry.client.renderer.textures.custom.ExtenderRender;
 
 public class SusyTextures {
@@ -56,6 +59,7 @@ public class SusyTextures {
     public static final OrientedOverlayRenderer UV_LIGHT_BOX_OVERLAY = new OrientedOverlayRenderer(
             "machines/uv_light_box");
     public static final OrientedOverlayRenderer CVD_OVERLAY = new OrientedOverlayRenderer("machines/cvd");
+    public static final OrientedOverlayRenderer ALD_OVERLAY = new OrientedOverlayRenderer("machines/ald");
     public static final OrientedOverlayRenderer ION_IMPLANTER_OVERLAY = new OrientedOverlayRenderer(
             "machines/ion_implanter");
     public static final OrientedOverlayRenderer SPIN_COATER_OVERLAY = new OrientedOverlayRenderer(
@@ -67,7 +71,7 @@ public class SusyTextures {
     public static final OrientedOverlayRenderer BATH_CONDENSER_OVERLAY = new OrientedOverlayRenderer(
             "machines/bath_condenser");
     public static final OrientedOverlayRenderer CATALYTIC_REFORMER_OVERLAY = new OrientedOverlayRenderer(
-            "multiblock/catalytic_reformer");
+            "machines/multiblocks/catalytic_reformer");
     public static final OrientedOverlayRenderer INCINERATOR_OVERLAY = new OrientedOverlayRenderer(
             "machines/incinerator");
 
@@ -142,6 +146,8 @@ public class SusyTextures {
             "machines/multiblocks/smoke_stack");
     public static final OrientedOverlayRenderer PRIMITIVE_SMELTER_OVERLAY = new OrientedOverlayRenderer(
             "machines/multiblocks/primitive_smelter");
+    public static final OrientedOverlayRenderer CUPOLA_FURNACE_OVERLAY = new OrientedOverlayRenderer(
+            "machines/multiblocks/cupola_furnace");
     public static final OrientedOverlayRenderer TURNING_ZONE_OVERLAY = new OrientedOverlayRenderer(
             "machines/multiblocks/turning_zone");
     public static final OrientedOverlayRenderer MILLING_OVERLAY = new OrientedOverlayRenderer(
@@ -166,6 +172,16 @@ public class SusyTextures {
             "machines/multiblocks/injection_molder");
     public static final OrientedOverlayRenderer POLYMERIZATION_TANK_OVERLAY = new OrientedOverlayRenderer(
             "machines/multiblocks/polymerization_tank");
+    public static final OrientedOverlayRenderer ECCENTRIC_ROLL_CRUSHER_OVERLAY = new OrientedOverlayRenderer(
+            "machines/multiblocks/eccentric_roll_crusher");
+    public static final OrientedOverlayRenderer BALL_MILL_OVERLAY = new OrientedOverlayRenderer(
+            "machines/multiblocks/ball_mill");
+    public static final OrientedOverlayRenderer ATTRITION_SCRUBBER_OVERLAY = new OrientedOverlayRenderer(
+            "machines/multiblocks/attrition_scrubber");
+    public static final OrientedOverlayRenderer SCREEN_PRINTER_OVERLAY = new OrientedOverlayRenderer(
+            "machines/screen_printer");
+    public static final OrientedOverlayRenderer EDM_OVERLAY = new OrientedOverlayRenderer(
+            "machines/multiblocks/edm");
 
     public static final SimpleOverlayRenderer SLAG_HOT = new SimpleOverlayRenderer("resource/slag_hot");
     public static final SimpleOverlayRenderer RESTRICTIVE_FILTER_FILTER_OVERLAY = new SimpleOverlayRenderer(
@@ -174,9 +190,15 @@ public class SusyTextures {
             "logistics/overlay_strand_bus");
     public static final SimpleOverlayRenderer CODE_BREACHER_OVERLAY = new SimpleOverlayRenderer(
             "storage/crates/code_breacher");
+    public static final SimpleOverlayRenderer REDSTONE_CONTROLLER_OVERLAY = new SimpleOverlayRenderer(
+            "machines/overlay/overlay_redstone");
+    public static final SimpleOverlayRenderer DRONE_BASKET_OVERLAY = new SimpleOverlayRenderer(
+            "storage/crates/drone_basket");
 
     public static final SimpleCubeRenderer MASONRY_BRICK = new SimpleCubeRenderer(
             "gregtech:blocks/multiblock_casing/masonry_brick");
+    public static final SimpleCubeRenderer BALL_MILL_SHELL = new SimpleCubeRenderer(
+            "gregtech:blocks/casings/grinder_casing/wear_resistant_lined_mill_shell");
     public static final SimpleCubeRenderer SILICON_CARBIDE_CASING = new SimpleCubeRenderer(
             "gregtech:blocks/multiblock_casing/silicon_carbide_casing");
     public static final SimpleCubeRenderer MONEL_500_CASING = new SimpleCubeRenderer(
@@ -185,10 +207,18 @@ public class SusyTextures {
             "gregtech:blocks/multiblock_casing/copper_casing_pipe");
     public static final SimpleCubeRenderer ULV_STRUCTURAL_CASING = new SimpleCubeRenderer(
             "gregtech:blocks/multiblock_casing/ulv_structural_casing");
+    public static final SimpleCubeRenderer HYDROSTATIC_CASING = new SimpleCubeRenderer(
+            "gregtech:blocks/multiblock_casing/hydrostatic_casing");
+    public static final SimpleCubeRenderer ALUMINIUM_GEARBOX = new SimpleCubeRenderer(
+            "gregtech:blocks/multiblock_casing/aluminium_gearbox");
     public static final SimpleCubeRenderer STEEL_TURBINE_CASING = new SimpleCubeRenderer(
             "gregtech:blocks/casings/mechanic/machine_casing_turbine_steel");
     public static final SimpleCubeRenderer TITANIUM_TURBINE_CASING = new SimpleCubeRenderer(
             "gregtech:blocks/casings/mechanic/machine_casing_turbine_titanium");
+    public static final SimpleCubeRenderer AEROSPACE_GASKET = new SimpleCubeRenderer(
+            "gregtech:blocks/rocket_multiblock_casing/aerospace_gasket");
+    public static final SimpleCubeRenderer ABRASION_RESISTANT_CASING = new SimpleCubeRenderer(
+            "gregtech:blocks/casings/grinder_casing/abrasion_resistant_casing");
 
     public static final DrumRenderer PLASTIC_CAN = new DrumRenderer("storage/drums/plastic_can");
 
@@ -200,6 +230,7 @@ public class SusyTextures {
     public static final OrientedOverlayRenderer STOCK_FLUID_EXCHANGER = new OrientedOverlayRenderer(
             "rail_interfaces/fluid_exchanger");
     public static final OrientedOverlayRenderer STOCK_ITEM_EXCHANGER = new OrientedOverlayRenderer(
+
             "rail_interfaces/item_exchanger");
 
     public static final SimpleOrientedCubeRenderer STOCK_DETECTOR_NEITHER = new SimpleOrientedCubeRenderer(
@@ -218,4 +249,14 @@ public class SusyTextures {
 
     public static final OrientedOverlayRenderer STOCK_CONTROLLER = new OrientedOverlayRenderer(
             "rail_interfaces/stock_controller");
+    public static final SimpleCubeRenderer[] METAL_SHEETS = new SimpleCubeRenderer[32];
+
+    static {
+        for (EnumDyeColor color : EnumDyeColor.values()) {
+            METAL_SHEETS[color.getMetadata()] = new SimpleCubeRenderer(
+                    "gregtech:blocks/decoration/metalsheet_" + SuSyUtility.getNameForColor(color));
+            METAL_SHEETS[color.getMetadata() + 16] = new SimpleCubeRenderer(
+                    "gregtech:blocks/decoration/large_metalsheet_" + SuSyUtility.getNameForColor(color));
+        }
+    }
 }

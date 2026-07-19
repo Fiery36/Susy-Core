@@ -6,24 +6,25 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.jetbrains.annotations.NotNull;
 
 import gregtech.GTInternalTags;
+import supercritical.common.SCConfigHolder;
 import supersymmetry.api.capability.SuSyCapabilities;
 import supersymmetry.api.sound.SusySounds;
 import supersymmetry.common.CommonProxy;
 import supersymmetry.common.SusyMetaEntities;
 import supersymmetry.common.blocks.SuSyBlocks;
 import supersymmetry.common.blocks.SuSyMetaBlocks;
-import supersymmetry.common.command.CommandHordeBase;
-import supersymmetry.common.command.CommandHordeStart;
-import supersymmetry.common.command.CommandHordeStatus;
-import supersymmetry.common.command.CommandHordeStop;
+import supersymmetry.common.command.*;
 import supersymmetry.common.covers.SuSyCoverBehaviors;
 import supersymmetry.common.event.DimensionBreathabilityHandler;
 import supersymmetry.common.item.SuSyMetaItems;
 import supersymmetry.common.metatileentities.SuSyMetaTileEntities;
+import supersymmetry.common.rocketry.SusyRocketComponents;
+import supersymmetry.common.tileentities.SuSyTileEntities;
 import supersymmetry.loaders.SuSyIRLoader;
 
 @Mod(name = Supersymmetry.NAME,
@@ -50,6 +51,9 @@ public class Supersymmetry {
         // GTValues.HT = true;
         SuSyIRLoader.initDefinitions();
         SuSyIRLoader.initEntities();
+
+        // Very annoying config
+        SCConfigHolder.misc.enableMaterialModifications = false;
 
         // Groovyscript starts immediately!
         proxy.checkCanaryFile();
@@ -85,16 +89,31 @@ public class Supersymmetry {
 
     @Mod.EventHandler
     public void onPostInit(@NotNull FMLPostInitializationEvent event) {
+        SusyRocketComponents.init();
         proxy.postLoad();
     }
 
     @Mod.EventHandler
     public void onServerStarting(@NotNull FMLServerStartingEvent event) {
         CommandHordeBase hordeCommand = new CommandHordeBase();
+        CommandRecipemapDump jeidump = new CommandRecipemapDump();
+        CommandUntranslatedKeys untranslatedKeys = new CommandUntranslatedKeys();
         event.registerServerCommand(hordeCommand);
+        event.registerServerCommand(jeidump);
+        event.registerServerCommand(untranslatedKeys);
 
         hordeCommand.addSubcommand(new CommandHordeStart());
         hordeCommand.addSubcommand(new CommandHordeStop());
         hordeCommand.addSubcommand(new CommandHordeStatus());
+        hordeCommand.addSubcommand(new CommandHordeKill());
+        hordeCommand.addSubcommand(new CommandHordeResetScripted());
+
+        event.registerServerCommand(new CommandFactionHate());
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Mod.EventHandler
+    public void registerRenderers(FMLPreInitializationEvent event) {
+        SuSyTileEntities.registerRenderers();
     }
 }

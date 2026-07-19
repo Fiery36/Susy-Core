@@ -117,7 +117,7 @@ public class MetaTileEntityDronePad extends RecipeMapMultiblockController {
                 pos.y, pos.z, true));
 
         if (drone != null) {
-            setDrone(drone.withPadPos(getPos()));
+            setDrone(drone.withLandingPos(getPos()));
         }
 
         if (getDrone() != null) {
@@ -267,6 +267,10 @@ public class MetaTileEntityDronePad extends RecipeMapMultiblockController {
             if (!this.getMetaTileEntity().droneReachedSky && this.getMetaTileEntity().getDrone() != null &&
                     this.getMetaTileEntity().getDrone().reachedSky()) {
                 this.getMetaTileEntity().setDroneDead(true);
+            }
+
+            if (this.getMetaTileEntity().getDrone() == null && !this.getMetaTileEntity().droneReachedSky) {
+                this.invalidate();
             }
 
             if (maxProgressTime - progressTime == 240 && this.getMetaTileEntity().droneReachedSky) {
