@@ -485,7 +485,8 @@ susy.machine.reverberatory_furnace.name=Reverberatory Furnace
 susy.machine.blender.name=Blender
 susy.machine.sieve_distillation_tower.name=Sieve Distillation Tower
 susy.machine.induction_furnace.name=Induction Furnace
-
+susy.machine.induction_furnace.explosion_tooltip=Will explode without cooling or if provided water while overheated
+gregtech.multiblock.induction_furnace.description=The Induction Furnace is a multiblock structure used for melting metals and creating alloys. The furnace generates heat while operating, requiring a steady supply of cooling water. Excessive temperatures can damage the induction coils, while introducing cooling water to an overheated furnace will cause a steam explosion.
 susy.machine.curtain_coater.name=Curtain Coater
 susy.multiblock.pattern.error.conveyor=§cAll conveyor belts must be the same§r
 

@@ -10,6 +10,9 @@ import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.TextComponentUtil;
+import gregtech.client.utils.TooltipHelper;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,10 +26,14 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import supersymmetry.api.gui.SusyGuiTextures;
 import supersymmetry.api.recipes.SuSyRecipeMaps;
 import supersymmetry.common.blocks.BlockCrucible;
 import supersymmetry.common.blocks.BlockInductionCoilAssembly;
@@ -188,10 +195,13 @@ public class MetaTileEntityInductionFurnace extends RecipeMapMultiblockControlle
                 .build();
     }
 
-//    @Override
-//    public String[] getDescription() {
-//        return new String[] { I18n.format("gregtech.multiblock.large_boiler.description") };
-//    }
+    @Override
+    public void addInformation(
+            ItemStack stack, @Nullable World player, @NotNull List<String> tooltip,
+            boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(TooltipHelper.BLINKING_RED + I18n.format("susy.machine.induction_furnace.explosion_tooltip"));
+    }
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -232,7 +242,7 @@ public class MetaTileEntityInductionFurnace extends RecipeMapMultiblockControlle
             return GuiTextures.PROGRESS_BAR_FLUID_RIG_DEPLETION;
 
         } else if (index == 1) {
-            return GuiTextures.PROGRESS_BAR_FLUID_RIG_DEPLETION;
+            return SusyGuiTextures.PROGRESS_BAR_HEAT;
         }
         else {
             return null;
