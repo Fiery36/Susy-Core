@@ -168,7 +168,7 @@ public class MetaTileEntityInductionFurnace extends RecipeMapMultiblockControlle
         return FactoryBlockPattern.start()
                 .aisle(" AAA ", " AAA ", " AAA ")
                 .aisle("AAAAA", "ACCCA", "AAAAA")
-                .aisle("AAAAA", "ACUCA", "AA#AA")
+                .aisle("AAAAA", "ACUCA", "AAAAA")
                 .aisle("AAAAA", "ACCCA", "AAAAA")
                 .aisle(" AAA ", " ASA ", " AAA ")
                 .where('S', selfPredicate())
