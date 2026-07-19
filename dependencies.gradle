@@ -20,7 +20,6 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-
     // # Fix crashes on macOS with Narrator
     runtimeOnly 'com.cleanroommc:osxnarratorblocker:1.0'
 
@@ -36,10 +35,10 @@ dependencies {
     api rfg.deobf('curse.maven:ctm-267602:2915363')
 
     // # GregTech Addons
-    // Supercritical 0.2.2
-    implementation rfg.deobf('curse.maven:supercritical-1185871:7034114')
+    // Supercritical 0.2.5
+    implementation rfg.deobf('curse.maven:supercritical-1185871:7864560')
     // GT-FO 1.12.4
-    implementation rfg.deobf('curse.maven:gregtech-food-option-477021:6147619')
+    implementation rfg.deobf('curse.maven:gregtech-food-option-477021:7449314')
 
     // # GroovyScript
     api 'com.cleanroommc:groovyscript:1.2.5' transitive false
@@ -83,6 +82,17 @@ dependencies {
     compileOnly rfg.deobf("curse.maven:creativecore-257814:4722163")
     compileOnly rfg.deobf("curse.maven:littletiles-257818:5180387")
 
+    // ProjectRed
+    compileOnly 'codechicken:ChickenASM:1.12-1.0.2.9' transitive false
+    compileOnly rfg.deobf('curse.maven:mrtjpcore-229002:2735197')
+    compileOnly rfg.deobf('curse.maven:cb-multipart-258426:2755790')
+    compileOnly rfg.deobf('curse.maven:project-red-core-228702:2745545')
+
+    runtimeOnly rfg.deobf("curse.maven:serverutil-282484:2503313")
+
+    //ICBM
+    //temporary dep, will replace once we have our own missiles
+    implementation rfg.deobf("curse.maven:icbm-244451:6496624")
     // # Optional dependencies. Uncomment the ones you need
 //    runtimeOnlyNonPublishable rfg.deobf('curse.maven:the-beneath-254629:3425551')
 //    runtimeOnlyNonPublishable rfg.deobf('curse.maven:realistic-terrain-generation-unofficial-648514:4404814')

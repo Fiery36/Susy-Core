@@ -5,6 +5,7 @@ import static dev.tianmi.sussypatches.client.renderer.textures.GCyMConnectedText
 import static dev.tianmi.sussypatches.client.renderer.textures.cube.VisualStateRenderer.from;
 import static supersymmetry.api.util.SuSyUtility.susyId;
 import static supersymmetry.common.blocks.BlockCoagulationTankWall.CoagulationTankWallType.WOODEN_COAGULATION_TANK_WALL;
+import static supersymmetry.common.blocks.BlockGrinderCasing.Type.ABRASION_RESISTANT_CASING;
 import static supersymmetry.common.blocks.BlockSuSyMultiblockCasing.CasingType.*;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +28,8 @@ public class SuSyConnectedTextures {
     public static final VisualStateRenderer MONEL_500_CASING_CTM;
     public static final VisualStateRenderer CONDUCTIVE_COPPER_PIPE_CTM;
     public static final VisualStateRenderer ULV_STRUCTURAL_CASING_CTM;
+    public static final VisualStateRenderer ABRASION_RESISTANT_CTM;
+    public static final VisualStateRenderer ALUMINIUM_GEARBOX_CTM;
 
     static {
         WOODEN_COAGULATION_TANK_WALL_CTM = from(
@@ -35,6 +38,8 @@ public class SuSyConnectedTextures {
         MONEL_500_CASING_CTM = from(SuSyBlocks.MULTIBLOCK_CASING.getState(MONEL_500_CASING));
         CONDUCTIVE_COPPER_PIPE_CTM = from(SuSyBlocks.MULTIBLOCK_CASING.getState(COPPER_PIPE));
         ULV_STRUCTURAL_CASING_CTM = from(SuSyBlocks.MULTIBLOCK_CASING.getState(ULV_STRUCTURAL_CASING));
+        ABRASION_RESISTANT_CTM = from(SuSyBlocks.GRINDER_CASING.getState(ABRASION_RESISTANT_CASING));
+        ALUMINIUM_GEARBOX_CTM = from(SuSyBlocks.MULTIBLOCK_CASING.getState(ALUMINIUM_GEARBOX));
     }
 
     public static void init() {
@@ -72,7 +77,9 @@ public class SuSyConnectedTextures {
                 susyId("smoke_stack"),
                 susyId("vacuum_distillation_tower"),
                 susyId("landing_pad"),
-                susyId("advanced_arc_furnace"));
+                susyId("advanced_arc_furnace"),
+                susyId("internal_combustion_generator"),
+                susyId("large_steam_hammer"));
         FROST_PROOF_CASING_CTM.override(susyId("condenser"),
                 susyId("high_pressure_cryogenic_distillation_plant"),
                 susyId("low_pressure_cryogenic_distillation_plant"),
@@ -85,9 +92,9 @@ public class SuSyConnectedTextures {
                 susyId("mixer_settler"),
                 susyId("quencher"),
                 susyId("sieve_distillation_tower"));
-        STEEL_TURBINE_CASING_CTM.override(susyId("basic_steam_turbine"),
-                susyId("basic_gas_turbine"));
-        TITANIUM_TURBINE_CASING_CTM.override(susyId("advanced_steam_turbine"));
+        STEEL_TURBINE_CASING_CTM.override(susyId("basic_steam_turbine"));
+        TITANIUM_TURBINE_CASING_CTM.override(susyId("advanced_steam_turbine"),
+                susyId("gas_turbine"));
         INERT_PTFE_CASING_CTM.override(susyId("fluidized_bed_reactor"),
                 susyId("blender"));
         SILICON_CARBIDE_CASING_CTM.override(susyId("high_temperature_distillation_tower"),
@@ -95,6 +102,7 @@ public class SuSyConnectedTextures {
         WOODEN_COAGULATION_TANK_WALL_CTM.override(susyId("coagulation_tank"));
         MONEL_500_CASING_CTM.override(susyId("strand_cooler"));
         ULV_STRUCTURAL_CASING_CTM.override(susyId("sintering_oven"));
+        ABRASION_RESISTANT_CTM.override(susyId("attrition_scrubber"));
         ROBUST_TUNGSTENSTEEL_CASING_CTM.override(susyId("magnetohydrodynamic_generator"));
         STRESS_PROOF_CTM.override(susyId("arc_furnace_complex"));
         VOLTAGE_CASING_ULV_CTM.override(susyId("fermentation_vat"));
