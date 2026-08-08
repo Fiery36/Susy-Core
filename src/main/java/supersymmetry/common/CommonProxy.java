@@ -193,8 +193,7 @@ public class CommonProxy {
         Materials.Aluminium.addFlags("continuously_cast");
         SusyGeneratedFluidHandler.init();
 
-        // SusyMaterials.removeFlags();
-        SusyMaterials.addFlags();
+        SusyMaterials.changeFlags();
     }
 
     @SubscribeEvent

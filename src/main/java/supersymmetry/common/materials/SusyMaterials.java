@@ -85,13 +85,6 @@ public class SusyMaterials {
         changeProperties();
     }
 
-    public static void removeFlags() {
-        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
-            if (material.hasFlag(MaterialFlags.DECOMPOSITION_BY_ELECTROLYZING))
-                removeFlag(MaterialFlags.DECOMPOSITION_BY_ELECTROLYZING, material);
-        }
-    }
-
     private static void changeProperties() {
         // removeProperty(PropertyKey.ORE, Materials.Graphite);
 
@@ -287,7 +280,7 @@ public class SusyMaterials {
         MOLTEN_TEMPERATURES.put(Materials.RedAlloy, 1357);
     }
 
-    public static void addFlags() {
+    public static void changeFlags() {
         for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
 
             IngotProperty ingotProperty = material.getProperty(PropertyKey.INGOT);
