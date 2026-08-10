@@ -2,6 +2,9 @@ package supersymmetry.common.metatileentities.multi.electric;
 
 import java.util.List;
 
+import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.pattern.PatternMatchContext;
+import gregtech.common.blocks.BlockWireCoil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,9 +38,11 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import supersymmetry.api.gui.SusyGuiTextures;
 import supersymmetry.api.recipes.SuSyRecipeMaps;
-import supersymmetry.common.blocks.BlockCrucible;
 import supersymmetry.common.blocks.BlockInductionCoilAssembly;
+import supersymmetry.common.blocks.BlockInductionCrucible;
 import supersymmetry.common.blocks.SuSyBlocks;
+
+import static supersymmetry.api.metatileentity.multiblock.SuSyPredicates.inductionCrucibles;
 
 public class MetaTileEntityInductionFurnace extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
@@ -187,12 +192,21 @@ public class MetaTileEntityInductionFurnace extends RecipeMapMultiblockControlle
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS)))
                 .where('C', states(SuSyBlocks.INDUCTION_COIL_ASSEMBLY
                         .getState(BlockInductionCoilAssembly.InductionCoilAssemblyType.COPPER)))
-                .where('U', states(SuSyBlocks.CRUCIBLE
-                        .getState(BlockCrucible.CrucibleType.SILICON_CARBIDE)))
+                .where('U', inductionCrucibles())
                 .where(' ', any())
                 .where('#', air())
                 .build();
     }
+
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+        Object type = context.get("InductionCrucibleType");
+        if (type instanceof IHeatingCoilBlockStats) {
+            this.blastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
+        } else {
+            this.blastFurnaceTemperature = BlockInductionCrucible.InductionCrucibleType.SILICON_CARBIDE.getCoilTemperature();
+        }
 
     @Override
     public void addInformation(
