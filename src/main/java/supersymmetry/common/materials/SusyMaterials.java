@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.FluidBuilder;
@@ -215,6 +216,24 @@ public class SusyMaterials {
         }
     }
 
+    private static void removeAllProperties(Material material) {
+        Map<PropertyKey<?>, IMaterialProperty> map = null;
+        try {
+            Field field = MaterialProperties.class.getDeclaredField("propertyMap");
+            field.setAccessible(true);
+            // noinspection unchecked
+            map = (Map<PropertyKey<?>, IMaterialProperty>) field.get(material.getProperties());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            SusyLog.logger.error("Failed to reflect material property map", e);
+        }
+        if (map != null) {
+            map.remove(PropertyKey.FLUID_PIPE);
+            map.remove(PropertyKey.ITEM_PIPE);
+            map.remove(PropertyKey.WIRE);
+            map.remove(PropertyKey.BLAST);
+        }
+    }
+
     private static void removeFlag(MaterialFlag flag, Material material) {
         HashSet<MaterialFlag> set = null;
         try {
@@ -230,6 +249,24 @@ public class SusyMaterials {
         }
         if (set != null) {
             set.remove(flag);
+        }
+    }
+
+    private static void removeAllFlags(Material material) {
+        HashSet<MaterialFlag> set = null;
+        try {
+            Field field = MaterialFlags.class.getDeclaredField("flags");
+            field.setAccessible(true);
+
+            Field field2 = Material.class.getDeclaredField("flags");
+            field2.setAccessible(true);
+            // noinspection unchecked
+            set = (HashSet<MaterialFlag>) field.get(field2.get(material));
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            SusyLog.logger.error("Failed to reflect material flag hashset", e);
+        }
+        if (set != null) {
+            set.clear();
         }
     }
 
@@ -280,8 +317,30 @@ public class SusyMaterials {
         MOLTEN_TEMPERATURES.put(Materials.RedAlloy, 1357);
     }
 
+    private static final Set<Material> MATERIAL_REMOVAL = Set.of(
+            Materials.TinAlloy,
+            Materials.CobaltBrass,
+            Materials.Potin,
+            Materials.BlackBronze,
+            Materials.SterlingSilver,
+            Materials.RedSteel,
+            Materials.BlueSteel,
+            Materials.RoseGold,
+            Materials.BismuthBronze,
+            Materials.DamascusSteel
+    );
+
     public static void changeFlags() {
         for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
+
+            if (MATERIAL_REMOVAL.contains(material)) {
+                for (Material mat : MATERIAL_REMOVAL) {
+                    removeAllProperties(mat);
+                }
+                removeAllFlags(material);
+                material.addFlags(MaterialFlags.GENERATE_PLATE);
+                material.addFlags(MaterialFlags.NO_UNIFICATION);
+            }
 
             IngotProperty ingotProperty = material.getProperty(PropertyKey.INGOT);
             if (ingotProperty != null) {

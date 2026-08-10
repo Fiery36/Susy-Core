@@ -32,14 +32,16 @@ public class BlockInductionCrucible extends VariantBlock<BlockInductionCrucible.
 
     public enum InductionCrucibleType implements IStringSerializable, IStateHarvestLevel {
 
-        SILICON_CARBIDE("silicon_carbide", 1),
-        ALUMINA("alumina", 1);
+        SILICON_CARBIDE("silicon_carbide", "Silicon Carbide", 1),
+        ALUMINA("alumina", "Alumina",1);
 
         private final String name;
         private final int harvestLevel;
+        public final String material;
 
-        InductionCrucibleType(String name, int harvestLevel) {
+        InductionCrucibleType(String name, String material, int harvestLevel) {
             this.name = name;
+            this.material = material;
             this.harvestLevel = harvestLevel;
         }
 
