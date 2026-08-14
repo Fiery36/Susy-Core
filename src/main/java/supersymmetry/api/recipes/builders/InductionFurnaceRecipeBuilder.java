@@ -6,8 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.util.EnumValidationResult;
-import supersymmetry.api.SusyLog;
 import supersymmetry.api.recipes.properties.InductionCrucibleMaterialProperty;
 
 public class InductionFurnaceRecipeBuilder extends RecipeBuilder<InductionFurnaceRecipeBuilder> {
@@ -43,9 +41,9 @@ public class InductionFurnaceRecipeBuilder extends RecipeBuilder<InductionFurnac
     }
 
     public String getMaterial() {
-        return this.recipePropertyStorage == null ? "" :
+        return this.recipePropertyStorage == null ? "Silicon Carbide" :
                 this.recipePropertyStorage.getRecipePropertyValue(InductionCrucibleMaterialProperty.getInstance(),
-                        "Silicon Carbide");
+                        "");
     }
 
     @Override

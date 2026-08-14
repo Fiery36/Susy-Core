@@ -356,6 +356,9 @@ public class SusyMaterials {
                         builder.temperature(temp);
                         material.addFlags(SuSyMaterialFlags.INDUCTION_MELT);
 
+                        if (temp >= 1500) {
+                            material.addFlags(SuSyMaterialFlags.ALUMINA_CRUCIBLE);
+                        }
                         if (temp <= 1673) {
                             material.addFlags(SuSyMaterialFlags.RESISTANCE_MELT);
                         }

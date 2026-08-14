@@ -219,8 +219,7 @@ public class MetaTileEntityInductionFurnace extends RecipeMapMultiblockControlle
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (isStructureFormed()) {
-            ITextComponent materialString = TextComponentUtil.stringWithColor(TextFormatting.GRAY,
-                    TextFormattingUtil.formatNumbers(material));
+            ITextComponent materialString = TextComponentUtil.stringWithColor(TextFormatting.GRAY, material);
             textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY,
                     "susy.multiblock.induction_furnace.crucible_material", materialString));
         }
@@ -238,13 +237,8 @@ public class MetaTileEntityInductionFurnace extends RecipeMapMultiblockControlle
     }
 
     @Override
-    public void invalidateStructure() {
-        this.material = "";
-    }
-
-    @Override
     public boolean checkRecipe(@NotNull Recipe recipe, boolean consumeIfSuccess) {
-        return this.material.equals(recipe.getProperty(InductionCrucibleMaterialProperty.getInstance(), "Silicon Carbide"));
+        return this.material.equals(recipe.getProperty(InductionCrucibleMaterialProperty.getInstance(), ""));
     }
 
     @Override

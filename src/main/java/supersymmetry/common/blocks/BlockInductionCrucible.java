@@ -36,8 +36,8 @@ public class BlockInductionCrucible extends VariantBlock<BlockInductionCrucible.
         ALUMINA("alumina", "Alumina",1);
 
         private final String name;
-        private final int harvestLevel;
         public final String material;
+        private final int harvestLevel;
 
         InductionCrucibleType(String name, String material, int harvestLevel) {
             this.name = name;
