@@ -179,7 +179,6 @@ public class SuSyMaterialRecipeHandler {
     }
 
     public static void processInductionMelt(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
-        int temp = material.getFluid().getTemperature();
         String mat = "Silicon Carbide";
 
         if (material.hasFlag(SuSyMaterialFlags.ALUMINA_CRUCIBLE)) {
@@ -190,7 +189,6 @@ public class SuSyMaterialRecipeHandler {
                 .circuitMeta(1)
                 .input(ingot, material)
                 .fluidOutputs(material.getFluid(144))
-                .duration(Math.round((float) temp / 32))
                 .material(mat)
                 .EUt(30)
                 .buildAndRegister();
@@ -199,7 +197,6 @@ public class SuSyMaterialRecipeHandler {
                 .circuitMeta(1)
                 .input(dust, material)
                 .fluidOutputs(material.getFluid(144))
-                .duration(Math.round((float) temp / 32))
                 .EUt(30)
                 .material(mat)
                 .buildAndRegister();

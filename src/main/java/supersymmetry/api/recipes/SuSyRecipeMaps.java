@@ -8,6 +8,7 @@ import static gregtech.api.unification.ore.OrePrefix.spring;
 import java.util.List;
 import java.util.function.Consumer;
 
+import gregtech.api.unification.material.properties.PropertyKey;
 import net.minecraft.item.ItemStack;
 
 import gregtech.api.GTValues;
@@ -26,6 +27,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.core.sound.GTSoundEvents;
 import gregtech.core.unification.material.internal.MaterialRegistryManager;
+import net.minecraftforge.fluids.FluidStack;
 import supersymmetry.api.capability.impl.SuSyBoilerLogic;
 import supersymmetry.api.gui.SusyGuiTextures;
 import supersymmetry.api.recipes.builders.*;
@@ -657,22 +659,41 @@ public class SuSyRecipeMaps {
 
         SuSyRecipeMaps.INDUCTION_FURNACE.onRecipeBuild(recipeBuilder -> {
 
-            int fluidInput = 0;
-            if (!recipeBuilder.getFluidInputs().isEmpty()) {
-                fluidInput = recipeBuilder.getFluidInputs().getFirst().getInputFluidStack().amount;
-            }
+            int totalTemperature = 0;
+            System.out.println("[Recipe Debug] Inputs: " + recipeBuilder.getInputs());
+            for (GTRecipeInput recipeInput : recipeBuilder.getInputs()) {
+                for (ItemStack input : recipeInput.getInputStacks()) {
+                    if (OreDictUnifier.getPrefix(input) != OrePrefix.dust &&
+                            OreDictUnifier.getPrefix(input) != OrePrefix.ingot)
+                        continue;
 
-            if (fluidInput != 0 && recipeBuilder.getDuration() == 0) {
-                int fluidOutput = 0;
+                    System.out.println("[Recipe Debug] Input: " + input);
 
-                if (!recipeBuilder.getFluidOutputs().isEmpty()) {
-                    fluidOutput = recipeBuilder.getFluidOutputs().getFirst().amount;
+                    MaterialStack matStack = OreDictUnifier.getMaterial(input);
+                    if (matStack == null || matStack.material == null ||
+                            !matStack.material.hasProperty(PropertyKey.FLUID))
+                        continue;
+
+                    int temperature = matStack.material.getFluid().getTemperature();
+                    int amount = input.getCount();
+
+                    System.out.println("[Recipe Debug] Material: " + matStack.material +
+                            " | Amount: " + amount +
+                            " | Temperature: " + temperature);
+
+                    totalTemperature += temperature * amount;
+
+                    break;
                 }
-
-                int netFluid = fluidOutput - fluidInput;
-
-                recipeBuilder.duration(netFluid / 144 * 40);
             }
+
+            int duration = totalTemperature / 64;
+
+            System.out.println("[Recipe Debug] Total Temperature: " + totalTemperature);
+            System.out.println("[Recipe Debug] Duration: " + duration);
+
+            recipeBuilder.duration(duration);
         });
     }
 }
+

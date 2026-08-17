@@ -342,6 +342,8 @@ public class SusyMaterials {
                 material.addFlags(MaterialFlags.NO_UNIFICATION);
             }
 
+            Materials.BlueSteel.addFlags(MaterialFlags.GENERATE_FRAME);
+
             IngotProperty ingotProperty = material.getProperty(PropertyKey.INGOT);
             if (ingotProperty != null) {
 
