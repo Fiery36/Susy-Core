@@ -4,6 +4,7 @@ import static supersymmetry.api.util.SuSyUtility.susyId;
 
 import gregtech.api.fluids.FluidState;
 import gregtech.api.fluids.store.FluidStorageKey;
+import gregtech.api.unification.material.info.MaterialIconType;
 import supersymmetry.api.unification.material.info.SuSyMaterialIconType;
 
 public final class SusyFluidStorageKeys {
@@ -18,6 +19,10 @@ public final class SusyFluidStorageKeys {
     public static final FluidStorageKey SUPERCRITICAL = new FluidStorageKey(susyId("supercritical"),
             SuSyMaterialIconType.supercritical, s -> "supercritical_" + s, m -> "susy.fluid.supercritical",
             FluidState.GAS, -1);
+
+    public static final FluidStorageKey AQUEOUS = new FluidStorageKey(susyId("aqueous_solution"),
+            MaterialIconType.liquid, s -> s + "_solution", m -> "susy.fluid.aqueous_solution",
+            FluidState.LIQUID, -1);
 
     private SusyFluidStorageKeys() {}
 }

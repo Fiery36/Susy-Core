@@ -38,7 +38,7 @@ public class MetaTileEntityReactionFurnace extends RecipeMapMultiblockController
                 .aisle("F   F", "FBBBF", "XXSXX", "XXXXX", "     ").where('S', selfPredicate())
                 .where('X',
                         states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
-                                .setMinGlobalLimited(13).or(autoAbilities(true, true, true, true, true, true, false)))
+                                .setMinGlobalLimited(13).or(abilities(MultiblockAbility.INPUT_ENERGY).setExactLimit(1)))
                 .where('P', states(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE)))
                 .where('F', frames(Materials.Invar)).where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('B',
